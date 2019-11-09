@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="70ec8105-b2ef-4add-aca7-ff7b2e8aea1b" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="mr-jenkinsFlow" doc:id="8476b2ce-6f9c-4b4e-aaac-0d9ed97f1482" >
+		<http:listener doc:name="Listener" doc:id="a99be274-eecc-46e9-98d7-3dd48a61bd0a" config-ref="HTTP_Listener_config" path="/ping">
+			<http:response statusCode="#[vars.httpStatus]" />
+			<http:error-response statusCode="#[vars.httpStatus]" />
+		</http:listener>
+		<set-variable value="#[attributes.queryParams.status default 200]" doc:name="Set httpStatus" doc:id="b8d28f63-4342-40a2-b1c6-be8ac1c54d89" variableName="httpStatus"/>
+		<set-payload value="#[output application/json --- { status: vars.httpStatus }]" doc:name="Set Payload" doc:id="8f817217-8a32-42ab-b3f6-58bcdfd0e67d" />
+	</flow>
+</mule>
