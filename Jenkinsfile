@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'maven' 
-            arg '-u michaelrobinson'
+            args '-u michaelrobinson'
         }
     }
     stages {
