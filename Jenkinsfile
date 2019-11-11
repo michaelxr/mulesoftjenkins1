@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                sh 'mvn -X -B -s settings-jenkins.xml -DskipTests -Dhttp.proxyHost=proxy.det.nsw.edu.au -Dhttp.proxyPort=80 -Dhttps.proxyHost=proxy.det.nsw.edu.au -Dhttps.proxyPort=80 clean package' 
+                sh 'mvn -X -B -DskipTests -Dhttp.proxyHost=proxy.det.nsw.edu.au -Dhttp.proxyPort=80 -Dhttps.proxyHost=proxy.det.nsw.edu.au -Dhttps.proxyPort=80 clean package' 
             }
         }
     }
