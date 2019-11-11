@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                sh 'mvn -B -s mule-settings-jenkins.xml -DskipTests clean package' 
+                sh 'mvn -B -s /root/.m2/settings-jenkins.xml -DskipTests clean package' 
             }
         }
     }
